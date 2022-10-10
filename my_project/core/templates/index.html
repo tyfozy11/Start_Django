@@ -4,82 +4,61 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
     </head>
     <body>
-        <nav class="navbar navbar-dark bg-primary">
-          <a class="navbar-brand" href="/">Your learning!</a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                 Course categories
-              </a>
-              <div class="dropdown-menu">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
-              </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
-                  Teachers
-                </a>
-                <div class="dropdown-menu">
-                    {% for teacher in teachers %}
-                        <a class="dropdown-item" href="#">{{ teacher.name }}</a>
-                    {% endfor %}
-                </div>
-              </li>
-            </ul>
-          </div>
-        </nav>
-
-        <div class="container">
-            <br>
-            <div class="row">
-                {% for product in product_list %}
-                <div class="col-md-3">
-                    <div class="card" style="margin-bottom: 10px;">
-                      <img src="{{ product.image.url }}" style="max-height: 120px;" class="card-img-top" alt="...">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.description }}</p>
-                        <a href="#">{{ product.vendor.name }}</a><br>
-                        <p>
-                            {% for tag in product.tags.all %}
-                                <a href="#">{{ tag.name }}</a>
-                                {% if not forloop.last %}, {% endif %}
-                            {% endfor %}
-                        </p>
-                        <a href="#" class="btn btn-primary">Buy ${{ product.price }}</a>
-                      </div>
+            <ul class="nav nav-pills bg-dark">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/"><h2>Your school</h2></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><h4>Categories course</h4></a>
+                    <div class="dropdown-menu">
+                        {% for category in categories %}
+                            <a class="dropdown-item" href="#">{{ category.name }}</a>
+                        {% endfor%}
                     </div>
-                </div>
-                {% endfor %}
-            </div>
-            <div>
-                <div class="pagination">
-                    <span class="step-links">
-                        {% if page_obj.has_previous %}
-                            <a href="?page=1">&laquo; first</a>
-                            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-                        {% endif %}
+                </li>
+            </ul>
+            <div class="container">
+                <br>
+                <div class="row">
+                    {% for course in course_list %}
+                    <div class="col-md-4">
+                        <div class="card" style="margin-botttom: 15px;" >
+                            <div class="card-body">
 
-                        <span class="current">
-                            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-                        </span>
+                                        <h5 class="card-title">{{ course.name }}</h5>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ course.name_teacher }}</h6>
+                                        <p class="card-text">{{ course.description }}</p>
+                                        <p class="card-text">{{ course.short_list_of_course_theses}}</p>
+                                        <a href="#" class="card-link"> Go to the course</a>
+                                        <br>
+                                        <a href="#" class="card-link"> Go to the Teacher: {{ course.name_teacher }} </a>
 
-                        {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}">next</a>
-                            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-                        {% endif %}
-                    </span>
+                            </div>
+                        </div>
+                    </div>
+                     {% endfor%}
                 </div>
+                    <div>
+                        <div class="pagination">
+                            <span class="step-links">
+                                {% if page_obj.has_previous %}
+                                    <a href="?page=1">&laquo; first</a>
+                                    <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                                {% endif %}
+
+                                <span class="current">
+                                    Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                                </span>
+
+                                {% if page_obj.has_next %}
+                                    <a href="?page={{ page_obj.next_page_number }}">next</a>
+                                    <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                                {% endif %}
+                            </span>
+                        </div>
+                    </div>
+
             </div>
-        </div>
 
         <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>

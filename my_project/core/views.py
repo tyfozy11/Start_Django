@@ -1,17 +1,18 @@
-from django.views.generic import TemplateView, DetailView
-from django.contrib.auth.models import User
-from core.models import Group, Teacher, Student
+from django.views.generic import TemplateView, DetailView, ListView
+from core.models import Group, Teacher, Student, Courses, Category
 
 
-class IndexTemplateView(TemplateView):
+class IndexView(ListView):
     template_name = "index.html"
+    models = Courses
+    paginate_by = 10
 
-    def get_context_data(self, **kwargs):
-        context = super(IndexTemplateView, self).get_context_data(**kwargs)
-        context['users'] = User.objects.all()
+    def get_queryset(self):
+        queryset = super(IndexView, self).get_queryset()
+        return queryset.order_by("name").select_related(
+            "name_teacher")
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(IndexView, self).get_context_data(*args, **kwargs)
+        context["categories"] = Category.objects.all()
         return context
-
-
-class ProfileView(DetailView):
-    template_name = "profile.html"
-    model = User
