@@ -16,6 +16,18 @@
                         {% endfor%}
                     </div>
                 </li>
+                   <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><h4>Create new:</h4></a>
+                        <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#">Create_student</a>
+                                <a class="dropdown-item" href="#">Create_courses</a>
+                        </div>
+                    </li>
+
+                     <form action="/search/" method="get" class="form-inline my-2 my-lg-0">
+                          <input class="form-control mr-sm-2" type="search" placeholder="Search" name="q" aria-label="Search">
+                          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                     </form>
             </ul>
             <div class="container">
                 <br>
@@ -24,7 +36,6 @@
                     <div class="col-md-4">
                         <div class="card" style="margin-botttom: 15px;" >
                             <div class="card-body">
-
                                         <h5 class="card-title">{{ course.name }}</h5>
                                         <h6 class="card-subtitle mb-2 text-muted">{{ course.name_teacher }}</h6>
                                         <p class="card-text">{{ course.description }}</p>
@@ -32,7 +43,6 @@
                                         <a href="#" class="card-link"> Go to the course</a>
                                         <br>
                                         <a href="#" class="card-link"> Go to the Teacher: {{ course.name_teacher }} </a>
-
                             </div>
                         </div>
                     </div>
