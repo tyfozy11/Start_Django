@@ -6,7 +6,7 @@ from core.forms import StudentCreateForm, CoursesCreateForm
 
 class IndexView(ListView):
     template_name = "index.html"
-    models = Courses
+    model = Courses
 
     # paginate_by = 10
     #
