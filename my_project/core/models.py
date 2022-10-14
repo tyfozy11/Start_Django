@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class NameIt(models.Model):
+class Name(models.Model):
     name = models.CharField(max_length=255)
 
     class Meta:
@@ -11,28 +11,28 @@ class NameIt(models.Model):
         return self.name
 
 
-class Group(NameIt):
+class Group(Name):
     pass
 
 
-class Teacher(NameIt):
+class Teacher(Name):
     age = models.PositiveIntegerField(default=0)
     email = models.EmailField(max_length=200)
     group = models.ForeignKey("core.Group", on_delete=models.SET_NULL, null=True)
 
 
-class Student(NameIt):
+class Student(Name):
     age = models.PositiveIntegerField(default=0)
     email = models.EmailField(max_length=200)
     group = models.ForeignKey("core.Group", on_delete=models.SET_NULL, null=True)
 
 
-class Courses(NameIt):
+class Courses(Name):
     category = models.ForeignKey("core.Category", on_delete=models.SET_NULL, null=True)
     description = models.TextField()
     name_teacher = models.ForeignKey("core.Teacher", on_delete=models.SET_NULL, null=True)
     short_list_of_course_theses = models.TextField()
 
 
-class Category(NameIt):
+class Category(Name):
     pass
