@@ -10,7 +10,7 @@ class IndexView(ListView):
     def get_queryset(self):
         queryset = super(IndexView, self).get_queryset()
         return queryset.order_by("name").select_related(
-            "name_teacher")
+            "name_teacher").filter(name_teacher=True)
 
     def get_context_data(self, *args, **kwargs):
         context = super(IndexView, self).get_context_data(*args, **kwargs)
