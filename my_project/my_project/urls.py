@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 from core import views
 
-urlpatterns = {
+urlpatterns = [
     path('admin/', admin.site.urls),
     path("", views.IndexView.as_view()),
     path("search/", views.SearchView.as_view()),
@@ -25,4 +25,4 @@ urlpatterns = {
     path("student_create/", views.StudentCreate.as_view()),
     path('__debug__/', include('debug_toolbar.urls')),
 
-}
+]

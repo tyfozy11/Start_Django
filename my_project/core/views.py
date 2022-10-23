@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.shortcuts import redirect
 from django.views.generic import TemplateView, ListView
 from core.models import Courses, Category
 from core.forms import StudentCreateForm, CoursesCreateForm
@@ -45,6 +46,16 @@ class StudentCreate(TemplateView):
         context["form"] = StudentCreateForm()
         return context
 
+    def post(self, request):
+        form = StudentCreateForm(data=request.POST)
+        if form.is_valid():
+            form.create_student()
+            return redirect('/')
+
+        context = self.get_context_data()
+        context['form'] = form
+        return self.render_to_response(context)
+
 
 class CoursesCreate(TemplateView):
     template_name = "create_courses.html"
@@ -53,3 +64,13 @@ class CoursesCreate(TemplateView):
         context = super(CoursesCreate, self).get_context_data()
         context["form"] = CoursesCreateForm()
         return context
+
+    def post(self, request):
+        form = CoursesCreateForm(data=request.POST)
+        if form.is_valid():
+            form.create_courses()
+            return redirect('/')
+
+        context = self.get_context_data()
+        context['form'] = form
+        return self.render_to_response(context)
