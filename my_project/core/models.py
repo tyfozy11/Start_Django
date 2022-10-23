@@ -22,7 +22,7 @@ class Teacher(Name):
 
 
 class Student(Name):
-    age = models.PositiveIntegerField(default=0)
+    age = models.PositiveIntegerField(default=18)
     email = models.EmailField(max_length=200)
     group = models.ForeignKey("core.Group", on_delete=models.SET_NULL, null=True)
     course = models.ForeignKey("core.Courses", on_delete=models.SET_NULL, null=True)

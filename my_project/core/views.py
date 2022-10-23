@@ -1,8 +1,8 @@
 from django.db.models import Q
 from django.shortcuts import redirect
-from django.views.generic import TemplateView, ListView
+from django.views.generic import TemplateView, ListView, FormView, CreateView
 from core.models import Courses, Category
-from core.forms import StudentCreateForm, CoursesCreateForm
+from core.forms import StudentCreateForm
 
 
 class IndexView(ListView):
@@ -38,39 +38,14 @@ class SearchView(ListView):
         return super(SearchView, self).get_queryset()
 
 
-class StudentCreate(TemplateView):
+class StudentCreate(FormView):
     template_name = "create_student.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(StudentCreate, self).get_context_data()
-        context["form"] = StudentCreateForm()
-        return context
-
-    def post(self, request):
-        form = StudentCreateForm(data=request.POST)
-        if form.is_valid():
-            form.create_student()
-            return redirect('/')
-
-        context = self.get_context_data()
-        context['form'] = form
-        return self.render_to_response(context)
+    form_class = StudentCreateForm
+    success_url = '/'
 
 
-class CoursesCreate(TemplateView):
+class CoursesCreate(CreateView):
     template_name = "create_courses.html"
-
-    def get_context_data(self, **kwargs):
-        context = super(CoursesCreate, self).get_context_data()
-        context["form"] = CoursesCreateForm()
-        return context
-
-    def post(self, request):
-        form = CoursesCreateForm(data=request.POST)
-        if form.is_valid():
-            form.create_courses()
-            return redirect('/')
-
-        context = self.get_context_data()
-        context['form'] = form
-        return self.render_to_response(context)
+    model = Courses
+    fields = '__all__'
+    success_url = '/'
