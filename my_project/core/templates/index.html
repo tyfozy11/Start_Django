@@ -17,10 +17,12 @@
                     </div>
                 </li>
                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><h4>Create new:</h4></a>
+                        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><h4>Create and Change data:</h4></a>
                         <div class="dropdown-menu">
                                 <a class="dropdown-item" href="student_create/">Create_student</a>
+                                <a class="dropdown-item" href="change_student/?student_id={{ student.id }}">Change_student</a>
                                 <a class="dropdown-item" href="courses_create/">Create_courses</a>
+                                <a class="dropdown-item" href="change_courses/?courses_id={{ courses.id }}">Change_courses</a>
                         </div>
                     </li>
 
@@ -42,7 +44,7 @@
                                         <p class="card-text">{{ course.short_list_of_course_theses}}</p>
                                         <a href="#" class="card-link"> Go to the course</a>
                                         <br>
-                                        <a href="#" class="card-link"> Go to the Teacher: {{ course.name_teacher }} </a>
+                                        <a href="change_courses/?courses_id={{ course.id }}" class="btn btn-outline-success my-2 my-sm-0" type="submit">Change_courses</a>
                             </div>
                         </div>
                     </div>

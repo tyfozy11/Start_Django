@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, ListView, FormView, CreateView
-from core.models import Courses, Category
+from core.models import Courses, Category, Student
 from core.forms import StudentCreateForm
 
 
@@ -14,11 +14,6 @@ class IndexView(ListView):
         queryset = super(IndexView, self).get_queryset()
         return queryset.order_by("name").select_related(
             "name_teacher")
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(IndexView, self).get_context_data(*args, **kwargs)
-        context["categories"] = Category.objects.all()
-        return context
 
 
 class SearchView(ListView):
@@ -49,3 +44,18 @@ class CoursesCreate(CreateView):
     model = Courses
     fields = '__all__'
     success_url = '/'
+
+
+class ChangeCourses(CoursesCreate):
+    def get_form_kwargs(self):
+        form_kwargs = super(ChangeCourses, self).get_form_kwargs()
+        form_kwargs['instance'] = Courses.objects.get(id=self.request.GET['courses_id'])
+        return form_kwargs
+
+
+class ChangeStudent(StudentCreate):
+
+    def get_form_kwargs(self):
+        form_kwargs = super(ChangeStudent, self).get_form_kwargs()
+        form_kwargs['instance'] = Student.objects.get(id=self.request.GET['student_id'])
+        return form_kwargs

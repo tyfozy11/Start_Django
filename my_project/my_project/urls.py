@@ -23,6 +23,8 @@ urlpatterns = [
     path("search/", views.SearchView.as_view()),
     path("courses_create/", views.CoursesCreate.as_view()),
     path("student_create/", views.StudentCreate.as_view()),
+    path("change_courses/", views.ChangeCourses.as_view()),
+    path("change_student/", views.ChangeStudent.as_view()),
     path('__debug__/', include('debug_toolbar.urls')),
 
 ]
