@@ -1,6 +1,8 @@
+from django.contrib.auth import login
 from django.db.models import Q
-from django.shortcuts import redirect
-from django.views.generic import TemplateView, ListView, FormView, CreateView
+from django.forms import Form
+from django.shortcuts import redirect, get_object_or_404
+from django.views.generic import UpdateView, ListView, FormView, CreateView
 from core.models import Courses, Category, Student
 from core.forms import StudentCreateForm
 
@@ -14,6 +16,12 @@ class IndexView(ListView):
         queryset = super(IndexView, self).get_queryset()
         return queryset.order_by("name").select_related(
             "name_teacher")
+
+
+class StudentsView(ListView):
+    template_name = "students.html"
+    model = Student
+    paginate_by = 10
 
 
 class SearchView(ListView):
@@ -46,16 +54,17 @@ class CoursesCreate(CreateView):
     success_url = '/'
 
 
-class ChangeCourses(CoursesCreate):
-    def get_form_kwargs(self):
-        form_kwargs = super(ChangeCourses, self).get_form_kwargs()
-        form_kwargs['instance'] = Courses.objects.get(id=self.request.GET['courses_id'])
-        return form_kwargs
+class ChangeCourses(UpdateView):
+    template_name = "create_courses.html"
+    model = Courses
+    fields = '__all__'
+    success_url = '/'
+    pk_url_kwarg = 'course_id'
 
 
-class ChangeStudent(StudentCreate):
-
-    def get_form_kwargs(self):
-        form_kwargs = super(ChangeStudent, self).get_form_kwargs()
-        form_kwargs['instance'] = Student.objects.get(id=self.request.GET['student_id'])
-        return form_kwargs
+class ChangeStudent(UpdateView):
+    template_name = "create_student.html"
+    model = Student
+    fields = '__all__'
+    success_url = '/'
+    pk_url_kwarg = 'student_id'

@@ -6,7 +6,7 @@
     <body>
             <ul class="nav nav-pills bg-dark">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/"><h2>Your school</h2></a>
+                    <a class="nav-link active" aria-current="page" href="{% url 'home' %}"><h2>Your school</h2></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"><h4>Categories course</h4></a>
@@ -16,7 +16,7 @@
                         {% endfor%}
                     </div>
                 </li>
-                     <form action="/search/" method="get" class="form-inline my-2 my-lg-0">
+                     <form action="{% url 'search'%}" method="get" class="form-inline my-2 my-lg-0">
                           <input class="form-control mr-sm-2" type="search" placeholder="Search" name="q" aria-label="Search">
                           <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
                      </form>
