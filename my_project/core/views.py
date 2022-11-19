@@ -54,6 +54,11 @@ class CoursesCreate(FormView):
     form_class = CoursesCreateForm
     success_url = '/'
 
+    def form_valid(self, form):
+        form.seve()
+        form.send_meal()
+        return super(CoursesCreate, self).form_valid(form)
+
 
 class ChangeCourses(UpdateView):
     template_name = "create_courses.html"
