@@ -1,10 +1,7 @@
-from django.contrib.auth import login
 from django.db.models import Q
-from django.forms import Form
-from django.shortcuts import redirect, get_object_or_404
-from django.views.generic import UpdateView, ListView, FormView, CreateView
-from core.models import Courses, Category, Student
-from core.forms import StudentCreateForm
+from django.views.generic import UpdateView, ListView, FormView
+from core.models import Courses, Student
+from core.forms import StudentCreateForm, CoursesCreateForm
 
 
 class IndexView(ListView):
@@ -22,6 +19,11 @@ class StudentsView(ListView):
     template_name = "students.html"
     model = Student
     paginate_by = 10
+
+    def get_queryset(self):
+        queryset = super(StudentsView, self).get_queryset()
+        return queryset.order_by("course").select_related(
+            "course")
 
 
 class SearchView(ListView):
@@ -47,10 +49,9 @@ class StudentCreate(FormView):
     success_url = '/'
 
 
-class CoursesCreate(CreateView):
+class CoursesCreate(FormView):
     template_name = "create_courses.html"
-    model = Courses
-    fields = '__all__'
+    form_class = CoursesCreateForm
     success_url = '/'
 
 

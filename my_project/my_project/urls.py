@@ -24,7 +24,7 @@ urlpatterns = [
     path("search/", views.SearchView.as_view(), name='search'),
     path("login/", LoginView.as_view(template_name='login.html'), name='login'),
     path("logout/", LogoutView.as_view(template_name='login.html'), name='logout'),
-    path("stutrnts/", views.StudentsView.as_view(), name='students'),
+    path("students/", views.StudentsView.as_view(), name='students'),
     path("", include(('core.urls', 'core'), namespace='data_correction')),
     path('__debug__/', include('debug_toolbar.urls')),
 

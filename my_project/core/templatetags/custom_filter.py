@@ -5,18 +5,22 @@ register = template.Library()
 
 
 @register.filter()
-def sampling_of_paired_numbers(value):
-    start_list = value.split()
+def sampling_of_paired_numbers(value: list) -> list:
+    if not isinstance(value, list):
+        raise TypeError
     finish_list = []
-
-    for char in start_list:
-        if char.isnumeric():
-            if int(char) % 2 == 0:
-                finish_list.append(int(char))
+    for char in value:
+        if isinstance(char, int) and char % 2 == 0:
+            finish_list.append(char)
     return finish_list
 
 
 @register.filter()
 @stringfilter
 def word_counter(text):
-    return len(text.split(' '))
+    return text.count(' ') + 1
+
+
+'''
+або використати  'wordcount' готовий на який я не звернув уваги коли чітав докунтацію, яле ви вказали мні на нього за що дякую вам)
+'''
