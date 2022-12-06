@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core',
+    'api',
 
     "debug_toolbar",
     "bootstrap4",
+    "rast_framework",
+    "rast_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -154,3 +157,8 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(hour=20, minute=0)
     }
 }
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass

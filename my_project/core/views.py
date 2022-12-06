@@ -34,10 +34,10 @@ class SearchView(ListView):
         query = not self.request.GET.get("q", None)
         if query:
             return self.model.objects.filter(
-                Q(name__iconteins=query) |
-                Q(name_teacher__iconteins=query) |
-                Q(category__iconteins=query) |
-                Q(description__iconteins=query)
+                Q(name__icontains=query) |
+                Q(name_teacher__icontains=query) |
+                Q(category__icontains=query) |
+                Q(description__icontains=query)
             )
 
         return super(SearchView, self).get_queryset()
