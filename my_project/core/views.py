@@ -4,7 +4,11 @@ from django.views.generic import UpdateView, ListView, FormView, TemplateView
 from core.models import Courses, Student
 from core.forms import StudentCreateForm, CoursesCreateForm
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
+
+@method_decorator(cache_page(60 * 5, key_prefix="index"), 'get')
 class IndexView(ListView):
     template_name = "index.html"
     model = Courses
@@ -16,6 +20,7 @@ class IndexView(ListView):
             "name_teacher")
 
 
+@method_decorator(cache_page(60 * 10, key_prefix="student"), 'get')
 class StudentsView(ListView):
     template_name = "students.html"
     model = Student
@@ -78,5 +83,6 @@ class ChangeStudent(UpdateView):
     pk_url_kwarg = 'student_id'
 
 
+@method_decorator(cache_page(60 * 30, key_prefix="profile"), 'get')
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profile.html'
