@@ -1,5 +1,6 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.views.generic import UpdateView, ListView, FormView
+from django.views.generic import UpdateView, ListView, FormView, TemplateView
 from core.models import Courses, Student
 from core.forms import StudentCreateForm, CoursesCreateForm
 
@@ -27,8 +28,9 @@ class StudentsView(ListView):
 
 
 class SearchView(ListView):
-    template_name = "index.html"
+    template_name = "search.html"
     model = Courses
+    context_object_name = 'search_results'
 
     def get_queryset(self):
         query = not self.request.GET.get("q", None)
@@ -74,3 +76,7 @@ class ChangeStudent(UpdateView):
     fields = '__all__'
     success_url = '/'
     pk_url_kwarg = 'student_id'
+
+
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'profile.html'

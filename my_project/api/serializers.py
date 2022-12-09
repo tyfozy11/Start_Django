@@ -1,14 +1,16 @@
+from abc import ABC
+
 from rest_framework import serializers
 from core.models import Student, Teacher, Group
 
 
-class ItemNameSerializer(serializers.Serializer):
+class NameSerializer(serializers.Serializer):
     id = serializers.IntegerField()
     name = serializers.CharField()
 
 
 class StudentSerializer(serializers.ModelSerializer):
-    group = ItemNameSerializer(read_only=True)
+    group = NameSerializer(read_only=True)
     group_id = serializers.IntegerField(write_only=True)
 
     class Meta:
@@ -17,7 +19,7 @@ class StudentSerializer(serializers.ModelSerializer):
 
 
 class TeacherSerializer(serializers.ModelSerializer):
-    group = ItemNameSerializer(read_only=True)
+    group = NameSerializer(read_only=True)
     group_id = serializers.IntegerField(write_only=True)
 
     class Meta:
@@ -25,9 +27,7 @@ class TeacherSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class GroupSerializer(serializers.ModelSerializer):
-    course = ItemNameSerializer(read_only=True)
-    course_id = serializers.IntegerField(write_only=True)
+class GroupSerializer(NameSerializer):
 
     class Meta:
         model = Group

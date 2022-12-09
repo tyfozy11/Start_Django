@@ -43,8 +43,8 @@ INSTALLED_APPS = [
 
     "debug_toolbar",
     "bootstrap4",
-    "rast_framework",
-    "rast_framework.authtoken",
+    "rest_framework",
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -152,10 +152,28 @@ CELERY_TIME_ZONE = TIME_ZONE
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CELERY_BEAT_SCHEDULE = {
-    'once a day': {
+    'mailing': {
         'task': 'core.tasks.mailing',
         'schedule': crontab(hour=20, minute=0)
+    },
+    'new_token': {
+        'task': 'api.tasks.new_token',
+        'schedule': crontab(hour=22, minute=0)
     }
+}
+ADMIN_EMAILS = [
+    'emanovs@icloud.com'
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    ]
 }
 
 try:
