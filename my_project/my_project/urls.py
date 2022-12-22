@@ -20,14 +20,14 @@ from core import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", views.IndexView.as_view(), name='home'),
+    path("", views.IndexView.as_view(template_name='index.html'), name='home'),
     path("search/", views.SearchView.as_view(template_name='search.html'), name='search'),
     path("login/", LoginView.as_view(template_name='login.html'), name='login'),
     path("logout/", LogoutView.as_view(template_name='login.html'), name='logout'),
     path("students/", views.StudentsView.as_view(), name='students'),
     path("profile/", views.ProfileView.as_view(), name='profile'),
     path("", include(('core.urls', 'core'), namespace='data_correction')),
-    path("api", include(('api.urls', 'api'), namespace='api')),
+    path("api/", include(('api.urls', 'api'), namespace='api')),
     path('__debug__/', include('debug_toolbar.urls')),
 
 ]
