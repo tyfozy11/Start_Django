@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+<h1>Profile</h1>
+<br>
+<table class="table">
+    <tr>
+        <td>Login</td>
+        <td>{{ user.username }}</td>
+    </tr>
+    <tr>
+        <td>Email</td>
+        <td>{{ user.email }}</td>
+    </tr>
+</table>
+{% endblock content %}
