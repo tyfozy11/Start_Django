@@ -1,0 +1,350 @@
+[
+{
+    "model": "core.group",
+    "pk": 1,
+    "fields": {
+        "name": "#1"
+    }
+},
+{
+    "model": "core.group",
+    "pk": 2,
+    "fields": {
+        "name": "#2"
+    }
+},
+{
+    "model": "core.group",
+    "pk": 3,
+    "fields": {
+        "name": "#3"
+    }
+},
+{
+    "model": "core.group",
+    "pk": 4,
+    "fields": {
+        "name": "#4"
+    }
+},
+{
+    "model": "core.group",
+    "pk": 5,
+    "fields": {
+        "name": "#5"
+    }
+},
+{
+    "model": "core.teacher",
+    "pk": 1,
+    "fields": {
+        "name": "Хорошилова Юлія Олексіївна",
+        "age": 29,
+        "email": "Horochnjak@gmail.com",
+        "group": 2
+    }
+},
+{
+    "model": "core.teacher",
+    "pk": 2,
+    "fields": {
+        "name": "Захарова Ольга Тарасівна",
+        "age": 35,
+        "email": "Tarasivna@gmail.com",
+        "group": 1
+    }
+},
+{
+    "model": "core.teacher",
+    "pk": 3,
+    "fields": {
+        "name": "Полум'я Захар Григорович",
+        "age": 55,
+        "email": "burn@icloud.com",
+        "group": 3
+    }
+},
+{
+    "model": "core.teacher",
+    "pk": 4,
+    "fields": {
+        "name": "Їжко Федір Іванович",
+        "age": 40,
+        "email": "Iglaaaa@icloud.com",
+        "group": 4
+    }
+},
+{
+    "model": "core.teacher",
+    "pk": 5,
+    "fields": {
+        "name": "Спрайт Мірінда Фантівна",
+        "age": 35,
+        "email": "Lekarr@gmail.com",
+        "group": 5
+    }
+},
+{
+    "model": "core.student",
+    "pk": 1,
+    "fields": {
+        "name": "Машко Ігор Максимович",
+        "age": 22,
+        "email": "maschina@icloud.com",
+        "group": 3,
+        "course": 5
+    }
+},
+{
+    "model": "core.student",
+    "pk": 2,
+    "fields": {
+        "name": "Трактор Олександр Семенович",
+        "age": 21,
+        "email": "rotor@icloud.com",
+        "group": 2,
+        "course": 5
+    }
+},
+{
+    "model": "core.student",
+    "pk": 3,
+    "fields": {
+        "name": "Гетьманський Володимир Олександрович",
+        "age": 19,
+        "email": "getyman@icloud.com",
+        "group": 2,
+        "course": 2
+    }
+},
+{
+    "model": "core.student",
+    "pk": 4,
+    "fields": {
+        "name": "Васян Марія Миколаївна",
+        "age": 20,
+        "email": "Grach@gmail.com",
+        "group": 1,
+        "course": 1
+    }
+},
+{
+    "model": "core.student",
+    "pk": 6,
+    "fields": {
+        "name": "Уважний Степан Степанович",
+        "age": 18,
+        "email": "uvaga@icloud.com",
+        "group": 4,
+        "course": 4
+    }
+},
+{
+    "model": "core.student",
+    "pk": 7,
+    "fields": {
+        "name": "Москаль Ванька Чмобікович",
+        "age": 23,
+        "email": "fugas@icloud.cov",
+        "group": 5,
+        "course": 5
+    }
+},
+{
+    "model": "core.student",
+    "pk": 8,
+    "fields": {
+        "name": "Щюр Марія Петрівна",
+        "age": 19,
+        "email": "djeri@gmail.com",
+        "group": 3,
+        "course": 4
+    }
+},
+{
+    "model": "core.student",
+    "pk": 9,
+    "fields": {
+        "name": "Гріня Василь Ігнатович",
+        "age": 20,
+        "email": "voggi@gmail.com",
+        "group": 4,
+        "course": 1
+    }
+},
+{
+    "model": "core.student",
+    "pk": 10,
+    "fields": {
+        "name": "Серга  Василина Андріївна",
+        "age": 25,
+        "email": "serga@gmail.com",
+        "group": 5,
+        "course": 2
+    }
+},
+{
+    "model": "core.student",
+    "pk": 11,
+    "fields": {
+        "name": "Клименко Ніна Якимівна",
+        "age": 17,
+        "email": "kuku@gmail.com",
+        "group": 1,
+        "course": 3
+    }
+},
+{
+    "model": "core.student",
+    "pk": 12,
+    "fields": {
+        "name": "Москаль_Ванька_Чмобікович",
+        "age": 22,
+        "email": "fugas@icloud.cov",
+        "group": 1,
+        "course": 3
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 1,
+    "fields": {
+        "name": "Курс профорієнтування",
+        "category": 6,
+        "description": "Короткий курс, який допоможе як вам так і нам визначіти що вам більш за все по душі!",
+        "name_teacher": 1,
+        "short_list_of_course_theses": "Семінари по професіям\r\nЛеккції про те на що в першу чергу слід звернути увагу при виборі професії\r\nТест з профорієнтування\r\nДопомога з вступу"
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 2,
+    "fields": {
+        "name": "Швидкий старт",
+        "category": 7,
+        "description": "Курс спрямований на введеня студентів внавчальний процес і поверхневе знайомство з майбутньою професією.",
+        "name_teacher": 3,
+        "short_list_of_course_theses": "Введення  і ознайомлення з роботою і правилами нашої школи.\r\nКороткий екскурс по програмі навчання.\r\nПрактічні заняття.\r\nСемінари."
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 3,
+    "fields": {
+        "name": "Чиста практика)",
+        "category": 7,
+        "description": "Курс для відточення практичного використання здобутих навичьок.",
+        "name_teacher": 5,
+        "short_list_of_course_theses": "Практичні заняття,\r\nБагато практичних Занять)!"
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 4,
+    "fields": {
+        "name": "Для підвищення рівня набутого за час що ми разом )",
+        "category": 8,
+        "description": "На цьому курсі ви спробуєте себе в ролі провідного спеціаліста!",
+        "name_teacher": 1,
+        "short_list_of_course_theses": "Заняття - імітації робочих реаліїв.\r\nГрупові заняття.\r\nРобота над помилками"
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 5,
+    "fields": {
+        "name": "Не думай що вже все знаєш!",
+        "category": 8,
+        "description": "Все! Ну майже) Останній крок - допомога з працевлаштування",
+        "name_teacher": 4,
+        "short_list_of_course_theses": "Як пройти співбесіду,\r\nСкладання резюме."
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 6,
+    "fields": {
+        "name": "wededwefwf",
+        "category": 6,
+        "description": "efwwfehe4gwg4vw54f",
+        "name_teacher": 2,
+        "short_list_of_course_theses": "ewfewfwf\r\nwfwfwef\r\nwfwfw"
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 7,
+    "fields": {
+        "name": "adadasdad",
+        "category": 6,
+        "description": "adasda\r\nadasda\r\nasdasd",
+        "name_teacher": 3,
+        "short_list_of_course_theses": "fafaf\r\ndfdf\r\nvrvw\r\nxx"
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 8,
+    "fields": {
+        "name": "fddfjltkrjergfehjk",
+        "category": 7,
+        "description": "dfhgjhkjlk;lkjfdghgjhkjl;.kjhggf",
+        "name_teacher": 1,
+        "short_list_of_course_theses": "jghfdggreh\r\nkjj,kjh\r\nmnbnm"
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 9,
+    "fields": {
+        "name": "qwq",
+        "category": 7,
+        "description": "qwsadf",
+        "name_teacher": 4,
+        "short_list_of_course_theses": "adadaf"
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 10,
+    "fields": {
+        "name": "adadada",
+        "category": 6,
+        "description": "bdbtybr",
+        "name_teacher": 2,
+        "short_list_of_course_theses": "btbbewvv"
+    }
+},
+{
+    "model": "core.courses",
+    "pk": 11,
+    "fields": {
+        "name": "wdwdwdwdwdwdwdwdwd",
+        "category": 6,
+        "description": "erjuio;polikujyhtgrfed",
+        "name_teacher": 2,
+        "short_list_of_course_theses": "vbnymuk,.o,imunybtvrrgh67j8k9l787rte6ghbn 54g6hj77hg"
+    }
+},
+{
+    "model": "core.category",
+    "pk": 6,
+    "fields": {
+        "name": "Основи та підготовка до навчання"
+    }
+},
+{
+    "model": "core.category",
+    "pk": 7,
+    "fields": {
+        "name": "Здобудь свою першу професію"
+    }
+},
+{
+    "model": "core.category",
+    "pk": 8,
+    "fields": {
+        "name": "Підійми рівень своїх знать то максимуму"
+    }
+}
+]

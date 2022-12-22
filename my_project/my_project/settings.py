@@ -9,8 +9,10 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
+from celery.schedules import crontab
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,7 +26,7 @@ SECRET_KEY = 'django-insecure-9_s$r1n&utsde5mjd2b!ja8yvxvg4h_jq27-x=y7zz$a&8^^*&
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]', '0.0.0.0']
 
 # Application definition
 
@@ -37,8 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core',
+    'api',
 
     "debug_toolbar",
+    "bootstrap4",
+    "rest_framework",
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -78,8 +84,12 @@ WSGI_APPLICATION = 'my_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'USER': os.getenv('POSTGRES_USER'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD'),
+        'NAME': os.getenv('POSTGRES_DB'),
+        'HOST': os.getenv('POSTGRES_DB_HOST'),
+        'PORT': os.getenv('POSTGRES_DB_PORT')
     }
 }
 
@@ -126,7 +136,61 @@ MEDIA_ROOT = BASE_DIR / 'media'
 
 INTERNAL_IPS = [
     "127.0.0.1",
+    "0. 0. 0. 0",
 ]
 
-LOGIN_REDIRECT_URL ='/'
-LOGOUT_REDIRECT_URL ='/'
+import socket
+
+ip = socket.gethostbyname(socket.gethostname())
+INTERNAL_IPS += [ip[:-1] + '1']
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
+CELERY_TIME_ZONE = TIME_ZONE
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+CELERY_BEAT_SCHEDULE = {
+    'mailing': {
+        'task': 'core.tasks.mailing',
+        'schedule': crontab(hour=20, minute=0)
+    },
+    'new_token': {
+        'task': 'api.tasks.new_token',
+        'schedule': crontab(hour=22, minute=0)
+    }
+}
+ADMIN_EMAILS = [
+    'emanovs@icloud.com'
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    ]
+}
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': 'memcached:11211',
+        'OPTIONS': {
+            'no_delay': True,
+            'ignore_exc': True,
+            'max_pool_size': 4,
+            'use_pooling': True,
+        }
+    }
+}
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
