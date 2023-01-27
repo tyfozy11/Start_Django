@@ -29,5 +29,4 @@ urlpatterns = [
     path("", include(('core.urls', 'core'), namespace='data_correction')),
     path("api/", include(('api.urls', 'api'), namespace='api')),
     path('__debug__/', include('debug_toolbar.urls')),
-
 ]
