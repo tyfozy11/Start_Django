@@ -36,6 +36,7 @@
                      </form>
                         {% if user.is_authenticated %}
                      <a href="{% url 'logout' %}" type="submit" class="btn btn-danger my-4 my-sm-2">Logout</a>
+                     <a href="{% url 'profile' %}" type="submit" class="btn btn-primary my-4 my-sm-2">Profile</a>
                         {% else %}
                      <a href="{% url 'login' %}" type="submit" class="btn btn-success my-4 my-sm-2">Login</a>
                         {% endif %}

@@ -39,9 +39,12 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'core',
+    'api',
 
     "debug_toolbar",
     "bootstrap4",
+    "rest_framework",
+    "rest_framework.authtoken",
 ]
 
 MIDDLEWARE = [
@@ -149,8 +152,45 @@ CELERY_TIME_ZONE = TIME_ZONE
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CELERY_BEAT_SCHEDULE = {
-    'once a day': {
+    'mailing': {
         'task': 'core.tasks.mailing',
         'schedule': crontab(hour=20, minute=0)
+    },
+    'new_token': {
+        'task': 'api.tasks.new_token',
+        'schedule': crontab(hour=22, minute=0)
     }
 }
+ADMIN_EMAILS = [
+    'emanovs@icloud.com'
+]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication'
+    ]
+}
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': 'memcached:11211',
+        'OPTIONS': {
+            'no_delay': True,
+            'ignore_exc': True,
+            'max_pool_size': 4,
+            'use_pooling': True,
+        }
+    }
+}
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass

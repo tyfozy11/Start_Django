@@ -1,9 +1,14 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.views.generic import UpdateView, ListView, FormView
+from django.views.generic import UpdateView, ListView, FormView, TemplateView
 from core.models import Courses, Student
 from core.forms import StudentCreateForm, CoursesCreateForm
 
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 
+
+@method_decorator(cache_page(60 * 3, key_prefix='index'), 'get')
 class IndexView(ListView):
     template_name = "index.html"
     model = Courses
@@ -15,6 +20,7 @@ class IndexView(ListView):
             "name_teacher")
 
 
+@method_decorator(cache_page(60 * 10, key_prefix="student"), 'get')
 class StudentsView(ListView):
     template_name = "students.html"
     model = Student
@@ -27,17 +33,18 @@ class StudentsView(ListView):
 
 
 class SearchView(ListView):
-    template_name = "index.html"
+    template_name = "search.html"
     model = Courses
+    context_object_name = 'search_results'
 
     def get_queryset(self):
         query = not self.request.GET.get("q", None)
         if query:
             return self.model.objects.filter(
-                Q(name__iconteins=query) |
-                Q(name_teacher__iconteins=query) |
-                Q(category__iconteins=query) |
-                Q(description__iconteins=query)
+                Q(name__icontains=query) |
+                Q(name_teacher__icontains=query) |
+                Q(category__icontains=query) |
+                Q(description__icontains=query)
             )
 
         return super(SearchView, self).get_queryset()
@@ -74,3 +81,8 @@ class ChangeStudent(UpdateView):
     fields = '__all__'
     success_url = '/'
     pk_url_kwarg = 'student_id'
+
+
+@method_decorator(cache_page(60 * 30, key_prefix="profile"), 'get')
+class ProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'profile.html'
