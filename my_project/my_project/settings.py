@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "bootstrap4",
     "rest_framework",
-    "rest_framework.authtoken",
+    "rest_framework.authtoken"
 ]
 
 MIDDLEWARE = [
@@ -117,6 +117,7 @@ AUTH_PASSWORD_VALIDATORS = [
 LANGUAGE_CODE = 'uk-uk'
 
 TIME_ZONE = 'UTC'
+DATE_INPUT_FORMATS = ['%d/%m/%Y']
 
 USE_I18N = True
 
@@ -175,7 +176,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication'
     ]
 }
-
 
 CACHES = {
     'default': {
