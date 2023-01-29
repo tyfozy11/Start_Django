@@ -1,4 +1,5 @@
 from django.db import models
+from my_project import settings
 
 
 class Name(models.Model):
@@ -37,3 +38,14 @@ class Courses(Name):
 
 class Category(Name):
     pass
+
+
+class ExchangeRates(models.Model):
+    bank = models.CharField(max_length=255, unique=True)
+    currency_name_1 = models.CharField(max_length=255, default=True)
+    currency_name_2 = models.CharField(max_length=255, default=True)
+    rate_buy = models.DecimalField(max_digits=7, decimal_places=4, default=True)
+    rate_sell = models.DecimalField(max_digits=7, decimal_places=4, default=True)
+
+    def __str__(self):
+        return f"{self.bank } {self.currency_name_1}"
