@@ -20,3 +20,7 @@ class GroupListView(ModelViewSet):
 
     def get_queryset(self):
         return Group.objects.all()
+
+
+
+

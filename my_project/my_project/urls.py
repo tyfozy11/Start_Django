@@ -13,21 +13,24 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.contrib.auth.views import LoginView, LogoutView
 from django.urls import path, include
 from core import views
+from my_project import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("", views.IndexView.as_view(template_name='index.html'), name='home'),
-    path("search/", views.SearchView.as_view(template_name='search.html'), name='search'),
-    path("login/", LoginView.as_view(template_name='login.html'), name='login'),
-    path("logout/", LogoutView.as_view(template_name='login.html'), name='logout'),
-    path("students/", views.StudentsView.as_view(), name='students'),
-    path("profile/", views.ProfileView.as_view(), name='profile'),
-    path("", include(('core.urls', 'core'), namespace='data_correction')),
-    path("api/", include(('api.urls', 'api'), namespace='api')),
-    path('__debug__/', include('debug_toolbar.urls')),
+                  path('admin/', admin.site.urls),
+                  path("", views.IndexView.as_view(template_name='index.html'), name='home'),
+                  path("search/", views.SearchView.as_view(template_name='search.html'), name='search'),
+                  path("login/", LoginView.as_view(template_name='login.html'), name='login'),
+                  path("logout/", LogoutView.as_view(template_name='login.html'), name='logout'),
+                  path("students/", views.StudentsView.as_view(), name='students'),
+                  path("profile/", views.ProfileView.as_view(), name='profile'),
+                  path("", include(('core.urls', 'core'), namespace='data_correction')),
+                  path("api/", include(('api.urls', 'api'), namespace='api'), name='api'),
+                  path("student_api_page/", views.StudentApilView.as_view(template_name='student_api_page.html'),name='student_api_page'),
+                  path('__debug__/', include('debug_toolbar.urls')),
 
-]
+              ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

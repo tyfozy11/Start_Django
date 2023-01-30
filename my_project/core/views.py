@@ -86,3 +86,9 @@ class ChangeStudent(UpdateView):
 @method_decorator(cache_page(60 * 30, key_prefix="profile"), 'get')
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = 'profile.html'
+
+
+class StudentApilView(TemplateView):
+    template_name = 'student_api_page.html'
+    model = Student
+

@@ -11,7 +11,9 @@ class NameSerializer(serializers.Serializer):
 
 class StudentSerializer(serializers.ModelSerializer):
     group = NameSerializer(read_only=True)
+    course = NameSerializer(read_only=True)
     group_id = serializers.IntegerField(write_only=True)
+    course_id = serializers.IntegerField(write_only=True)
 
     class Meta:
         model = Student

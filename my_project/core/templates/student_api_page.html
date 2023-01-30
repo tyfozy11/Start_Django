@@ -1,0 +1,53 @@
+{% load static %}
+
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    .container {
+      text-align: center;
+      padding: 30px;
+      margin: 5px auto;
+    }
+
+    .table,
+        td {
+          border-collapse: collapse;
+          margin-left: auto;
+          margin-right: auto;
+          text-align: center;
+          padding: 10px;
+          border: 1px solid black;
+    }
+</style>
+<body>
+<div class="container">
+ <div class="head">
+      <h1 id="head">Students</h1>
+    </div>
+
+    <div class="details">
+      <table>
+        <tr id="name">
+          <td>Name</td>
+        </tr>
+        <tr id="age">
+          <td>Age</td>
+        </tr>
+        <tr id="email">
+          <td>Email</td>
+        </tr>
+        <tr id="course">
+          <td>Course</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="{% static 'js/for_api.js' %}"></script>
+
+</body>
+</html>
